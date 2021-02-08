@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">RoboCar</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="alert_msg">Enter Valid Url</string>
+    <string name="alertbox_title">Enter The Url</string>
+    <string name="cancelbutton">Cancel</string>
+    <string name="submitbutton">Submit</string>
+    <string name="Pause">Pause</string>
+    <string name="Play">Play</string>
+    <string name="demomsg">Sound Detected!</string>
+    <string name="demodate">29/12/2020 15:31:05</string>
+    <string name="TODO">TODO</string>
+</resources>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#0E68FF</color>
+    <color name="colorPrimaryDark">#0E68FF</color>
+    <color name="colorAccent">#2962FF</color>
+    <color name="white">#FFFFFF</color>
+    <color name="green">#38C172</color>
+    <color name="toolbarbackground">#0E68FF</color>
+    <color name="homebackground">@color/toolbarbackground</color>
+    <color name="notification_card_back">#310E68FF</color>
+</resources>

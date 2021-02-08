@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/dragline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:src="@drawable/dragline"
+        android:contentDescription="@string/TODO"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="4">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/home"
+            android:id="@+id/homebutton"
+            android:layout_weight="1"
+            android:layout_gravity="center_horizontal"
+            android:contentDescription="@string/TODO"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/notification"
+            android:id="@+id/notificationbutton"
+            android:layout_weight="1"
+            android:layout_gravity="center_horizontal"
+            android:contentDescription="@string/TODO"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/video"
+            android:id="@+id/videobutton"
+            android:layout_weight="1"
+            android:layout_gravity="center_horizontal"
+            android:contentDescription="@string/TODO"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/internet_mode"
+            android:id="@+id/internet_modebutton"
+            android:layout_weight="1"
+            android:layout_gravity="center_horizontal"
+            android:contentDescription="@string/TODO"/>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/forward"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/upward"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:contentDescription="@string/TODO"
+        android:layout_margin="10dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/leftbutton"
+            android:src="@drawable/left"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:layout_weight="1"
+            android:contentDescription="@string/TODO"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/right"
+            android:id="@+id/rightbutton"
+            android:layout_weight="1"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:contentDescription="@string/TODO"/>
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/backward"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/backward"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:contentDescription="@string/TODO"
+        android:layout_margin="10dp"/>
+
+
+</LinearLayout>

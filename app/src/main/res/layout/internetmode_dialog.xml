@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="15dp">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/alertbox_title"
+        android:textSize="35sp"
+        android:layout_marginTop="10dp"
+        android:textAlignment="viewStart"
+        android:textColor="@color/colorPrimary"
+        android:fontFamily="@font/segoeuibold"/>
+    <EditText
+        android:id="@+id/txt_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="25dp"
+        android:inputType="textUri"
+        android:layout_margin="15dp"
+        android:drawableStart="@drawable/internet_mode"
+        android:drawablePadding="10dp"
+        android:textColor="@color/colorPrimary"
+        android:hint="@string/alertbox_title"
+        android:textSize="20sp"
+        android:autofillHints="" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorPrimary"
+            android:text="@string/cancelbutton"
+            android:gravity="end"
+            android:padding="15dp"
+            android:textColor="@color/colorPrimary"
+            android:textSize="20sp"
+            android:layout_weight="1"
+            android:textStyle="bold"
+            android:id="@+id/btn_cancel"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorPrimary"
+            android:text="@string/submitbutton"
+            android:textColor="#ffffff"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_weight="1"
+            android:fontFamily="@font/segoeuibold"
+            android:background="@drawable/button_border"
+            android:id="@+id/btn_submit"/>
+    </LinearLayout>
+
+</LinearLayout>

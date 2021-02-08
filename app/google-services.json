@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "599688893080",
+    "firebase_url": "https://home-surveillance-robot.firebaseio.com",
+    "project_id": "home-surveillance-robot",
+    "storage_bucket": "home-surveillance-robot.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:599688893080:android:5fd4c65a93640acab736ed",
+        "android_client_info": {
+          "package_name": "com.example.robocar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "599688893080-3d37pbfn2vnn8pfolgc1fojjudds16md.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_s0ySmEK_gXiZoQaqMiFvhjqFWl07O1I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "599688893080-3d37pbfn2vnn8pfolgc1fojjudds16md.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:599688893080:android:db6da31b5c09f9a5b736ed",
+        "android_client_info": {
+          "package_name": "com.example.roboticcar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "599688893080-3d37pbfn2vnn8pfolgc1fojjudds16md.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_s0ySmEK_gXiZoQaqMiFvhjqFWl07O1I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "599688893080-3d37pbfn2vnn8pfolgc1fojjudds16md.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

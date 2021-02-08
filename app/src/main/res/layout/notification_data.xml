@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="10dp"
+    android:layout_marginTop="10dp"
+    android:scrollbars="vertical"
+    app:cardCornerRadius="12dp">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/white"
+        android:weightSum="3">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            tools:ignore="UseCompoundDrawables">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/notification"
+            android:background="@drawable/button_border"
+            android:backgroundTint="@color/notification_card_back"
+            android:layout_gravity="center_vertical|start"
+            android:layout_margin="12dp"
+            android:padding="16dp"
+            android:contentDescription="@string/TODO" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/notification_alert_msg"
+            android:text="@string/demomsg"
+            android:textStyle="bold"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:textSize="18sp"/>
+        </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/notification_alert_time"
+            android:text="@string/demodate"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimary"
+            android:layout_gravity="center_vertical"
+            android:gravity="end"
+            android:layout_margin="12dp"
+            android:textSize="18sp"/>
+
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
