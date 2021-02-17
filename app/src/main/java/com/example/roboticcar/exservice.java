@@ -36,16 +36,12 @@ public class exservice extends Service {
                 .build();
 
         startForeground(1, notification);
-        stopSelf();
+        //stopSelf();
 
-        NotificationManager manager = getSystemService(NotificationManager.class);
-       manager.notify(1, notification);
-        startForeground(1, notification);
+        //NotificationManager manager = getSystemService(NotificationManager.class);
+      // manager.notify(1, notification);
 
-
-
-
-        return START_STICKY;
+        return START_NOT_STICKY;
     }
 
     @Nullable

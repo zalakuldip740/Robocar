@@ -42,6 +42,7 @@ public class Notificationpage extends Fragment {
         adapter = new Notification_dataAdaptor(options);
         recyclerView.setAdapter(adapter);
 
+
         return view;
     }
 

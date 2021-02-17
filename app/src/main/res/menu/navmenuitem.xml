@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/homebutton"
+        android:title="@string/Home"
+        android:icon="@drawable/home"/>
+
+    <item android:id="@+id/notificationbutton"
+        android:title="@string/Notification"
+        android:icon="@drawable/notification"/>
+
+    <item android:id="@+id/internet_modebutton"
+        android:title="@string/Onlinemode"
+        android:icon="@drawable/internet_mode"/>
+
+    <item android:id="@+id/profilebutton"
+        android:title="@string/Profile"
+        android:icon="@drawable/profile"/>
+
+</menu>

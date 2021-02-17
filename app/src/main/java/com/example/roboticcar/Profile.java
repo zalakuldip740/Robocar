@@ -8,19 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class Videospage extends Fragment {
-View view;
 
-    public Videospage() {
-        // Required empty public constructor
-    }
+public class Profile extends Fragment {
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_videospage, container, false);
-        return view;
+        return inflater.inflate(R.layout.fragment_profile, container, false);
     }
 }
