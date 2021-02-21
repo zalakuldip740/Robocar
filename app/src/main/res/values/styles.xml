@@ -9,6 +9,12 @@
 
 
     <style name="CustomAlertDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
-        <item name="android:windowBackground">@drawable/controlcard</item>
+        <item name="android:windowBackground">@drawable/dialog_style</item>
+        <item name="fontFamily">@font/segoeuibold</item>
     </style>
+
+    <style name="navbarstyle" parent="Widget.Design.BottomNavigationView">
+        <item name="fontFamily">@font/segoeuibold</item>
+    </style>
+
 </resources>

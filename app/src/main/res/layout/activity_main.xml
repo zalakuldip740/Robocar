@@ -18,10 +18,13 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:background="@color/toolbarbackground"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:weightSum="2">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:id="@+id/toolbartext"
                 android:fontFamily="@font/segoeuibold"
                 android:textColor="@color/white"
@@ -29,7 +32,17 @@
                 android:layout_gravity="center_vertical"
                 android:textSize="35sp"
                 android:gravity="center_vertical"
-                android:layout_marginStart="20dp"/>
+                android:layout_marginStart="20dp"
+                tools:ignore="NestedWeights" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:scaleType="centerCrop"
+                android:backgroundTint="@color/white"
+                android:layout_gravity="center_vertical|end"
+                android:src="@mipmap/ic_launcher_round"/>
         </LinearLayout>
 
         <LinearLayout
@@ -38,7 +51,7 @@
             android:layout_weight="6"
             android:orientation="vertical"
             android:id="@+id/fragmentcontainer"
-            android:background="@drawable/controlcard">
+            android:background="@drawable/dialog_style">
 
         </LinearLayout>
     </LinearLayout>
@@ -47,10 +60,11 @@
 <com.google.android.material.bottomnavigation.BottomNavigationView
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:theme="@style/navbarstyle"
     android:id="@+id/bottomnavbar"
     android:layout_gravity="bottom|center_horizontal"
     android:layout_margin="25dp"
-    android:elevation="15dp"
+    android:elevation="5dp"
     android:background="@drawable/bottomnav_border"
     app:menu="@menu/navmenuitem"/>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

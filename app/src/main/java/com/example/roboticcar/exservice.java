@@ -1,15 +1,16 @@
 package com.example.roboticcar;
- import android.app.Notification;
- import android.app.NotificationManager;
- import android.app.PendingIntent;
-        import android.app.Service;
-        import android.content.Intent;
-        import android.os.IBinder;
 
- import androidx.annotation.Nullable;
- import androidx.core.app.NotificationCompat;
+import android.app.Notification;
+import android.app.PendingIntent;
+import android.app.Service;
+import android.content.Intent;
+import android.graphics.BitmapFactory;
+import android.os.IBinder;
 
- import static com.example.roboticcar.App.CHANNEL_ID;
+import androidx.annotation.Nullable;
+import androidx.core.app.NotificationCompat;
+
+import static com.example.roboticcar.App.CHANNEL_ID;
 
 
 public class exservice extends Service {
@@ -31,15 +32,17 @@ public class exservice extends Service {
         Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
                 .setContentTitle(datamsg)
                 .setContentText(datetimemsg)
-                .setSmallIcon(R.drawable.robocaricon)
+                .setSmallIcon(R.mipmap.ic_launcher_foreground)
+                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.notification))
                 .setContentIntent(pendingIntent)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .build();
 
         startForeground(1, notification);
         //stopSelf();
 
         //NotificationManager manager = getSystemService(NotificationManager.class);
-      // manager.notify(1, notification);
+        // manager.notify(1, notification);
 
         return START_NOT_STICKY;
     }

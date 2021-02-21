@@ -1,16 +1,18 @@
 package com.example.roboticcar;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,8 +20,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DatabaseReference;
@@ -35,26 +35,27 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 
-public class onmode extends Fragment implements View.OnClickListener{
+public class onmode extends Fragment implements View.OnTouchListener {
 
     View view;
-    ImageView Forwardbutton, Backwardbutton, Leftbutton, Rightbutton, Stopbutton;
+    ImageButton Forwardbutton, Backwardbutton, Leftbutton, Rightbutton;
     DatabaseReference controllerdata = FirebaseDatabase.getInstance().getReference().child(("Controls/data"));
     FloatingActionButton PlayPause;
     boolean flag = true;
-    LinearLayout Controller;
+    LinearLayout Controller, Instructor;
     WebView webView2;
-    TextView link;
+    TextView link,Instructor_text;
     String onmodeurl;
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_onmode, container, false);
         link = view.findViewById(R.id.extra);
         webView2 = view.findViewById(R.id.videoview2);
-
-
+        Instructor = view.findViewById(R.id.instructor);
+        Instructor_text=view.findViewById(R.id.instructor_text);
 
 
         final AlertDialog.Builder alert = new AlertDialog.Builder(Objects.requireNonNull(getActivity()), R.style.CustomAlertDialog);
@@ -67,16 +68,28 @@ public class onmode extends Fragment implements View.OnClickListener{
         alertDialog.setCanceledOnTouchOutside(false);
         alertDialog.getWindow().setGravity(Gravity.BOTTOM);
 
+        alertDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialogInterface) {
+                alertDialog.dismiss();
+                Instructor.setVisibility(View.VISIBLE);
+            }
+        });
+
         btn_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment fragment = new Home();
-                FragmentManager fragmentManager = Objects.requireNonNull(getActivity()).getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.fragmentcontainer, fragment);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
+                //Intent intent = new Intent(getActivity(), MainActivity.class);
+                //startActivity(intent);
+                //Fragment fragment = new Home();
+                //FragmentManager fragmentManager = Objects.requireNonNull(getActivity()).getSupportFragmentManager();
+                //FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                //fragmentTransaction.replace(R.id.fragmentcontainer, fragment);
+                //fragmentTransaction.addToBackStack(null);
+                //fragmentTransaction.commit();
                 alertDialog.dismiss();
+                Instructor.setVisibility(View.VISIBLE);
+
 
             }
         });
@@ -90,8 +103,11 @@ public class onmode extends Fragment implements View.OnClickListener{
                     toast.show();
 
                 } else {
-                    onmodeurl =txt_inputText.getText().toString();
+                    onmodeurl = txt_inputText.getText().toString();
                     alertDialog.dismiss();
+                    Instructor.setVisibility(View.VISIBLE);
+                    Instructor_text.setText("Click Play Button To Start Streaming and Controlling.");
+                    PlayPause.setVisibility(View.VISIBLE);
                     link.setText(onmodeurl);
                 }
             }
@@ -99,79 +115,54 @@ public class onmode extends Fragment implements View.OnClickListener{
         alertDialog.show();
 
 
-
         Forwardbutton = view.findViewById(R.id.forward);
         Backwardbutton = view.findViewById(R.id.backward);
         Leftbutton = view.findViewById(R.id.leftbutton);
         Rightbutton = view.findViewById(R.id.rightbutton);
-        Stopbutton = view.findViewById(R.id.stopbutton);
+
+
         PlayPause = view.findViewById(R.id.playpause);
         Controller = view.findViewById(R.id.controller);
 
 
-        Forwardbutton.setOnClickListener(this);
-        Backwardbutton.setOnClickListener(this);
-        Leftbutton.setOnClickListener(this);
-        Rightbutton.setOnClickListener(this);
-        Stopbutton.setOnClickListener(this);
-        PlayPause.setOnClickListener(this);
-
-        return view;
-    }
-
-    @SuppressLint("NonConstantResourceId")
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.forward:
-                controllerdata.setValue("Forward");
+        Forwardbutton.setOnTouchListener(this);
+        Backwardbutton.setOnTouchListener(this);
+        Leftbutton.setOnTouchListener(this);
+        Rightbutton.setOnTouchListener(this);
 
 
-                OkHttpClient client = new OkHttpClient();
-                String url = "http://192.168.43.213:5000/carControl";
-                Request request = new Request.Builder()
-                        .url(url)
-                        .build();
-
-                client.newCall(request).enqueue(new Callback() {
-                    @Override
-                    public void onFailure(Call call, IOException e) {
-                        e.printStackTrace();
-                    }
-
-                    @Override
-                    public void onResponse(Call call, Response response) throws IOException {
-
-                    }
-                });
-
-
-                break;
-
-            case R.id.backward:
-                controllerdata.setValue("Backward");
-                break;
-
-            case R.id.leftbutton:
-                controllerdata.setValue("Left");
-                break;
-
-            case R.id.rightbutton:
-                controllerdata.setValue("Right");
-                break;
-
-            case R.id.stopbutton:
-                controllerdata.setValue("Stop");
-                break;
-
-            case R.id.playpause:
+        PlayPause.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
                 if (flag) {
 
                     PlayPause.setImageDrawable(ContextCompat.getDrawable(Objects.requireNonNull(getContext()), R.drawable.pause));
                     Controller.setVisibility(View.VISIBLE);
+                    Instructor.setVisibility(View.GONE);
                     webView2.loadUrl(onmodeurl);
                     flag = false;
+
+
+                    controllerdata.setValue("Stop");
+
+                    OkHttpClient client = new OkHttpClient();
+                    String url = "http://192.168.43.213:5000/carControl";
+                    Request request = new Request.Builder()
+                            .url(url)
+                            .build();
+
+                    client.newCall(request).enqueue(new Callback() {
+                        @Override
+                        public void onFailure(Call call, IOException e) {
+                            e.printStackTrace();
+                        }
+
+                        @Override
+                        public void onResponse(Call call, Response response) throws IOException {
+
+                        }
+                    });
 
                 } else {
 
@@ -182,10 +173,61 @@ public class onmode extends Fragment implements View.OnClickListener{
 
                 }
 
-                break;
-        }
+            }
+        });
+
+        return view;
     }
 
+    @SuppressLint({"ClickableViewAccessibility", "NonConstantResourceId"})
+    @Override
+    public boolean onTouch(View view, MotionEvent motionEvent) {
+        switch (view.getId()) {
+            case R.id.forward:
+                if (motionEvent.getAction() == MotionEvent.ACTION_UP ||
+                        motionEvent.getAction() == MotionEvent.ACTION_CANCEL) {
+                    controllerdata.setValue("Stop");
+                    Forwardbutton.setBackgroundColor(0);
+                } else if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+                    controllerdata.setValue("Forward");
+                    Forwardbutton.setBackgroundColor(0x310E68FF);
+                    // Forwardbutton.setElevation(4 / Objects.requireNonNull(getContext()).getResources().getDisplayMetrics().density);
+                }
+                break;
+            case R.id.backward:
+                if (motionEvent.getAction() == MotionEvent.ACTION_UP ||
+                        motionEvent.getAction() == MotionEvent.ACTION_CANCEL) {
+                    controllerdata.setValue("Stop");
+                    Backwardbutton.setBackgroundColor(0);
+                } else if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+                    controllerdata.setValue("Backward");
+                    Backwardbutton.setBackgroundColor(0x310E68FF);
+                }
+                break;
 
+            case R.id.leftbutton:
+                if (motionEvent.getAction() == MotionEvent.ACTION_UP ||
+                        motionEvent.getAction() == MotionEvent.ACTION_CANCEL) {
+                    controllerdata.setValue("Stop");
+                    Leftbutton.setBackgroundColor(0);
+                } else if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+                    controllerdata.setValue("Left");
+                    Leftbutton.setBackgroundColor(0x310E68FF);
+                }
+                break;
 
+            case R.id.rightbutton:
+                if (motionEvent.getAction() == MotionEvent.ACTION_UP ||
+                        motionEvent.getAction() == MotionEvent.ACTION_CANCEL) {
+                    controllerdata.setValue("Stop");
+                    Rightbutton.setBackgroundColor(0);
+                } else if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+                    controllerdata.setValue("Right");
+                    Rightbutton.setBackgroundColor(0x310E68FF);
+                }
+                break;
+
+        }
+        return true;
+    }
 }

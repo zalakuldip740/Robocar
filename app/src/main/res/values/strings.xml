@@ -14,5 +14,12 @@
     <string name="Notification">Notification</string>
     <string name="Onlinemode">Onmode</string>
     <string name="Profile">Profile</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="instructor">Click Play Button To Start Streaming and Controlling.</string>
+    <string name="instructor_onmode">Click Home Button For Default Streaming Or Onmode Button For New Streaming.</string>
+    <string name="Account">Account</string>
+    <string name="Help">Help</string>
+    <string name="Username_ip">UserName :</string>
+    <string name="Email">Email :</string>
+    <string name="Email_data">robocar123@gmail.com</string>
+
 </resources>

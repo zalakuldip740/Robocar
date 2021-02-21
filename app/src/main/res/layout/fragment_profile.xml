@@ -1,13 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     tools:context=".Profile">
 
-    <TextView
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="15dp"
+        android:elevation="2dp"
+        android:layout_margin="45dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Account"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="15dp"
+                android:textSize="30sp"
+                android:fontFamily="@font/segoeuibold"
+                android:textColor="@color/colorPrimary"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Username_ip"
+                android:textSize="25sp"
+                android:fontFamily="@font/segoeuibold"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="10dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ip_robocar"
+                android:text="170.150.12.10"
+                android:textSize="18sp"
+                android:padding="15dp"
+                android:fontFamily="@font/segoeuibold"
+                android:layout_gravity="center_horizontal|center_vertical"/>
 
-</FrameLayout>
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="vertical"
+        app:cardCornerRadius="15dp"
+        android:elevation="2dp"
+        android:layout_margin="45dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Help"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="15dp"
+                android:textSize="30sp"
+                android:fontFamily="@font/segoeuibold"
+                android:textColor="@color/colorPrimary"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Email"
+                android:textSize="25sp"
+                android:fontFamily="@font/segoeuibold"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="10dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Email_data"
+                android:textSize="18sp"
+                android:padding="15dp"
+                android:fontFamily="@font/segoeuibold"
+                android:layout_gravity="center_horizontal|center_vertical"/>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+</LinearLayout>

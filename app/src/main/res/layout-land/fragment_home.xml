@@ -7,27 +7,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/extra"
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:text=""
-            android:textColor="@color/colorPrimary"
-            android:fontFamily="@font/segoeuibold"
-            android:gravity="center_vertical|center_horizontal"/>
-
         <WebView
             android:id="@+id/videoview"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/extra" />
+            android:layout_height="match_parent"/>
 
         <LinearLayout
             android:id="@+id/instructor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:layout_margin="25dp"
+            android:layout_marginStart="200dp"
+            android:layout_marginEnd="200dp"
             android:background="@drawable/bottomnav_border"
             android:elevation="2dp"
             android:orientation="vertical">
@@ -44,14 +35,13 @@
 
         <LinearLayout
             android:id="@+id/controller"
-            android:layout_width="match_parent"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="100dp"
-            android:layout_marginEnd="50dp"
-            android:layout_marginStart="50dp"
-            android:background="@drawable/bottomnav_border"
+            android:layout_marginBottom="0dp"
+            android:layout_marginEnd="0dp"
+            android:background="@color/trans"
             android:elevation="2dp"
             android:orientation="vertical"
             android:visibility="gone">
@@ -60,7 +50,7 @@
                 android:id="@+id/forward"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
+                android:background="@color/trans"
                 android:layout_gravity="center_vertical|center_horizontal"
                 android:contentDescription="@string/TODO"
                 android:src="@drawable/upward"
@@ -76,7 +66,7 @@
                     android:id="@+id/leftbutton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@color/white"
+                    android:background="@color/trans"
                     android:layout_gravity="center_horizontal|center_vertical"
                     android:layout_weight="1"
                     android:contentDescription="@string/TODO"
@@ -86,7 +76,7 @@
                 <ImageButton
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:background="@color/white"
+                    android:background="@color/trans"
                     android:layout_gravity="center_horizontal|center_vertical"
                     android:layout_weight="1"
                     android:contentDescription="@string/TODO"/>
@@ -97,7 +87,7 @@
                     android:id="@+id/rightbutton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@color/white"
+                    android:background="@color/trans"
                     android:layout_gravity="center_horizontal|center_vertical"
                     android:layout_weight="1"
                     android:contentDescription="@string/TODO"
@@ -109,7 +99,7 @@
                 android:id="@+id/backward"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
+                android:background="@color/trans"
                 android:layout_gravity="center_vertical|center_horizontal"
                 android:contentDescription="@string/TODO"
                 android:src="@drawable/backward"
@@ -124,10 +114,10 @@
         android:layout_width="60dp"
         android:layout_height="wrap_content"
         android:id="@+id/playpause"
-        android:layout_gravity="bottom|end"
-        android:layout_marginEnd="20dp"
+        android:layout_gravity="bottom|start"
+        android:layout_marginStart="20dp"
         android:backgroundTint="@color/white"
-        android:layout_marginBottom="85dp"
+        android:layout_marginBottom="20dp"
         android:contentDescription="@string/TODO"
         android:src="@drawable/playbutton"
         android:elevation="2dp"/>
