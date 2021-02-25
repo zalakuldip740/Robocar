@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/extra"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:text=""
+            android:textColor="@color/colorPrimary"
+            android:fontFamily="@font/segoeuibold"
+            android:gravity="center_vertical|center_horizontal"/>
+
+        <WebView
+            android:id="@+id/videoview2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/extra" />
+
+        <LinearLayout
+            android:id="@+id/instructor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_margin="25dp"
+            android:background="@drawable/bottomnav_border"
+            android:elevation="2dp"
+            android:orientation="vertical"
+            android:visibility="gone">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/instructor_text"
+                android:text="@string/instructor_onmode"
+                android:padding="30dp"
+                android:textColor="@color/colorPrimary"
+                android:fontFamily="@font/segoeuibold"
+                android:gravity="center_horizontal|center_vertical"
+                android:textSize="18sp"/>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/playpause"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="20dp"
+        android:backgroundTint="@color/white"
+        android:layout_marginBottom="85dp"
+        android:contentDescription="@string/TODO"
+        android:src="@drawable/playbutton"
+        android:elevation="2dp"
+        android:visibility="gone"/>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

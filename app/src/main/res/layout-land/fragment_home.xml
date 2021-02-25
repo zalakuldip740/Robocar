@@ -7,10 +7,20 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <TextView
+            android:id="@+id/extra"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:text=""
+            android:textColor="@color/colorPrimary"
+            android:fontFamily="@font/segoeuibold"
+            android:gravity="center_vertical|center_horizontal"/>
+
         <WebView
             android:id="@+id/videoview"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:layout_below="@+id/extra" />
 
         <LinearLayout
             android:id="@+id/instructor"

@@ -29,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
     private Toast backToast;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
                     break;
 
                 case R.id.internet_modebutton:
-                    selectedfragment = new onmode();
+                    selectedfragment = new Onlinemode();
                     break;
 
                 case R.id.profilebutton:
@@ -121,5 +120,4 @@ public class MainActivity extends AppCompatActivity {
         }
         backPressedTime = System.currentTimeMillis();
     }
-
 }

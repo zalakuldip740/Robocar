@@ -15,8 +15,6 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -31,12 +29,13 @@ import okhttp3.Response;
 public class Home extends Fragment implements View.OnTouchListener {
     View view;
     ImageButton Forwardbutton, Backwardbutton, Leftbutton, Rightbutton;
-    DatabaseReference controllerdata = FirebaseDatabase.getInstance().getReference().child(("Controls/data"));
+    //DatabaseReference controllerdata = FirebaseDatabase.getInstance().getReference().child(("Controls/data"));
     FloatingActionButton PlayPause;
     boolean flag = true;
-    LinearLayout Controller,Instructor;
+    LinearLayout Controller, Instructor;
     WebView webView;
     TextView link;
+    String urlforward, urlbackward, urlleft, urlright, urlstop;
 
     @SuppressLint({"SetTextI18n", "ClickableViewAccessibility"})
     @Override
@@ -46,21 +45,16 @@ public class Home extends Fragment implements View.OnTouchListener {
         view = inflater.inflate(R.layout.fragment_home, container, false);
         link = view.findViewById(R.id.extra);
         webView = view.findViewById(R.id.videoview);
-        Instructor=view.findViewById(R.id.instructor);
+        Instructor = view.findViewById(R.id.instructor);
 
-        link.setText("https://www.google.com/webhp?authuser=1");
-
-
+        link.setText("http://192.168.43.213:5000/");
 
 
-        final OkHttpClient client = new OkHttpClient();
-        String url = "http://192.168.43.213:5000/carControl";
-        final Request request = new Request.Builder()
-                .url(url)
-                .build();
-
-
-
+        urlforward = "http://192.168.43.213:5000/carControl/Forward";
+        urlbackward = "http://192.168.43.213:5000/carControl/Backward";
+        urlleft = "http://192.168.43.213:5000/carControl/Left";
+        urlright = "http://192.168.43.213:5000/carControl/Right";
+        urlstop = "http://192.168.43.213:5000/carControl/Stop";
 
 
         Forwardbutton = view.findViewById(R.id.forward);
@@ -87,24 +81,11 @@ public class Home extends Fragment implements View.OnTouchListener {
                     PlayPause.setImageDrawable(ContextCompat.getDrawable(Objects.requireNonNull(getContext()), R.drawable.pause));
                     Controller.setVisibility(View.VISIBLE);
                     Instructor.setVisibility(View.GONE);
-                    webView.loadUrl("https://www.google.com/webhp?authuser=1");
+                    webView.loadUrl("http://192.168.43.213:5000/");
                     flag = false;
 
-                    controllerdata.setValue("Stop");
+                    //controllerdata.setValue("Stop");
 
-
-
-                    client.newCall(request).enqueue(new Callback() {
-                        @Override
-                        public void onFailure(Call call, IOException e) {
-                            e.printStackTrace();
-                        }
-
-                        @Override
-                        public void onResponse(Call call, Response response) throws IOException {
-
-                        }
-                    });
 
                 } else {
 
@@ -113,7 +94,6 @@ public class Home extends Fragment implements View.OnTouchListener {
                     webView.stopLoading();
                     flag = true;
 
-                    client.newCall(request).cancel();
 
                 }
 
@@ -123,6 +103,7 @@ public class Home extends Fragment implements View.OnTouchListener {
         return view;
     }
 
+
     @SuppressLint({"ClickableViewAccessibility", "NonConstantResourceId"})
     @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -130,20 +111,26 @@ public class Home extends Fragment implements View.OnTouchListener {
             case R.id.forward:
                 if (motionEvent.getAction() == MotionEvent.ACTION_UP ||
                         motionEvent.getAction() == MotionEvent.ACTION_CANCEL) {
-                    controllerdata.setValue("Stop");
+                    //controllerdata.setValue("Stop");
+                    controllingreq(urlstop);
                     Forwardbutton.setBackgroundColor(0);
                 } else if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-                    controllerdata.setValue("Forward");
+
+                    controllingreq(urlforward);
+                    // controllerdata.setValue("Forward");
                     Forwardbutton.setBackgroundColor(0x310E68FF);
                 }
                 break;
             case R.id.backward:
                 if (motionEvent.getAction() == MotionEvent.ACTION_UP ||
                         motionEvent.getAction() == MotionEvent.ACTION_CANCEL) {
-                    controllerdata.setValue("Stop");
+                    controllingreq(urlstop);
+                    // controllerdata.setValue("Stop");
                     Backwardbutton.setBackgroundColor(0);
                 } else if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-                    controllerdata.setValue("Backward");
+
+                    controllingreq(urlbackward);
+                    // controllerdata.setValue("Backward");
                     Backwardbutton.setBackgroundColor(0x310E68FF);
                 }
                 break;
@@ -151,10 +138,13 @@ public class Home extends Fragment implements View.OnTouchListener {
             case R.id.leftbutton:
                 if (motionEvent.getAction() == MotionEvent.ACTION_UP ||
                         motionEvent.getAction() == MotionEvent.ACTION_CANCEL) {
-                    controllerdata.setValue("Stop");
-                   Leftbutton.setBackgroundColor(0);
+                    controllingreq(urlstop);
+                    // controllerdata.setValue("Stop");
+                    Leftbutton.setBackgroundColor(0);
                 } else if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-                    controllerdata.setValue("Left");
+
+                    controllingreq(urlleft);
+                    // controllerdata.setValue("Left");
                     Leftbutton.setBackgroundColor(0x310E68FF);
                 }
                 break;
@@ -162,10 +152,13 @@ public class Home extends Fragment implements View.OnTouchListener {
             case R.id.rightbutton:
                 if (motionEvent.getAction() == MotionEvent.ACTION_UP ||
                         motionEvent.getAction() == MotionEvent.ACTION_CANCEL) {
-                    controllerdata.setValue("Stop");
+                    controllingreq(urlstop);
+                    // controllerdata.setValue("Stop");
                     Rightbutton.setBackgroundColor(0);
                 } else if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-                    controllerdata.setValue("Right");
+
+                    controllingreq(urlright);
+                    // controllerdata.setValue("Right");
                     Rightbutton.setBackgroundColor(0x310E68FF);
                 }
                 break;
@@ -173,4 +166,25 @@ public class Home extends Fragment implements View.OnTouchListener {
         }
         return true;
     }
+
+    private void controllingreq(String url) {
+
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url(url)
+                .build();
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+
+            }
+        });
+    }
+
+
 }

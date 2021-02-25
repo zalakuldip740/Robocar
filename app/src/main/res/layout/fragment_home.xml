@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="100dp"
+            android:layout_marginBottom="80dp"
             android:layout_marginEnd="50dp"
             android:layout_marginStart="50dp"
             android:background="@drawable/bottomnav_border"
@@ -63,8 +63,7 @@
                 android:background="@color/white"
                 android:layout_gravity="center_vertical|center_horizontal"
                 android:contentDescription="@string/TODO"
-                android:src="@drawable/upward"
-                android:layout_margin="10dp"/>
+                android:src="@drawable/upward" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -112,8 +111,7 @@
                 android:background="@color/white"
                 android:layout_gravity="center_vertical|center_horizontal"
                 android:contentDescription="@string/TODO"
-                android:src="@drawable/backward"
-                android:layout_margin="10dp"/>
+                android:src="@drawable/backward" />
         </LinearLayout>
 
 
