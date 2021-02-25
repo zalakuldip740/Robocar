@@ -9,4 +9,6 @@
     <color name="homebackground">@color/toolbarbackground</color>
     <color name="notification_card_back">#310E68FF</color>
     <color name="trans">#00000000</color>
+    <color name="red">#FF0303</color>
+    <color name="black">#000000</color>
 </resources>

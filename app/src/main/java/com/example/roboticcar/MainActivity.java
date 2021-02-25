@@ -77,6 +77,13 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
+
+
+
+
+
+
     private final BottomNavigationView.OnNavigationItemSelectedListener navigationitemselectedlistener = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @SuppressLint({"NonConstantResourceId", "SetTextI18n"})
         @Override
