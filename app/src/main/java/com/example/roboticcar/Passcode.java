@@ -21,22 +21,6 @@ public class Passcode extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_passcode);
         passcodeView=findViewById(R.id.passcode_view);
-        passcodeView.setLocalPasscode("1234")
-                .setListener(new PasscodeView.PasscodeViewListener() {
-                    @Override
-                    public void onFail() {
-
-                    }
-
-                    @Override
-                    public void onSuccess(String number) {
-                        Intent intent = new Intent(Passcode.this,MainActivity.class);
-                        startActivity(intent);
-                        finish();
-                        Toast.makeText(getApplicationContext(), "Successful", Toast.LENGTH_SHORT).show();
-                    }
-                });
-
 
 
         Executor executor = ContextCompat.getMainExecutor(this);
@@ -78,6 +62,22 @@ public class Passcode extends AppCompatActivity {
         biometricPrompt.authenticate(promptInfo);
 
 
+
+        passcodeView.setLocalPasscode("1234")
+                .setListener(new PasscodeView.PasscodeViewListener() {
+                    @Override
+                    public void onFail() {
+
+                    }
+
+                    @Override
+                    public void onSuccess(String number) {
+                        Intent intent = new Intent(Passcode.this,MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                        Toast.makeText(getApplicationContext(), "Successful", Toast.LENGTH_SHORT).show();
+                    }
+                });
 
 
 

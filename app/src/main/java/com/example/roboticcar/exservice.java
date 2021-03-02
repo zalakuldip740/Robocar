@@ -35,6 +35,7 @@ public class exservice extends Service {
                 .setSmallIcon(R.mipmap.ic_launcher_foreground)
                 .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.notification))
                 .setContentIntent(pendingIntent)
+                .setShowWhen(false)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .build();
 

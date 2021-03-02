@@ -21,17 +21,15 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.Objects;
 
-
-public class Onlinemode extends Fragment{
+public class Onlinemode extends Fragment {
 
     View view;
     FloatingActionButton PlayPause;
     boolean flag = true;
     LinearLayout Instructor;
     WebView webView2;
-    TextView link,Instructor_text;
+    TextView  Instructor_text;
     String onmodeurl;
 
     @SuppressLint("ClickableViewAccessibility")
@@ -39,13 +37,12 @@ public class Onlinemode extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_onlinemode, container, false);
-        link = view.findViewById(R.id.extra);
         webView2 = view.findViewById(R.id.videoview2);
         Instructor = view.findViewById(R.id.instructor);
-        Instructor_text=view.findViewById(R.id.instructor_text);
+        Instructor_text = view.findViewById(R.id.instructor_text);
 
 
-        final AlertDialog.Builder alert = new AlertDialog.Builder(Objects.requireNonNull(getActivity()), R.style.CustomAlertDialog);
+        final AlertDialog.Builder alert = new AlertDialog.Builder(requireActivity(), R.style.CustomAlertDialog);
         View mView = getLayoutInflater().inflate(R.layout.onmodedialog, null);
         final EditText txt_inputText = mView.findViewById(R.id.txt_input);
         TextView btn_cancel = mView.findViewById(R.id.btn_cancel);
@@ -93,25 +90,24 @@ public class Onlinemode extends Fragment{
                     onmodeurl = txt_inputText.getText().toString();
                     alertDialog.dismiss();
                     Instructor.setVisibility(View.VISIBLE);
-                    Instructor_text.setText("Click Play Button To Start Streaming and Controlling.");
+                    Instructor_text.setText("Click Play Button To Start Streaming.");
                     PlayPause.setVisibility(View.VISIBLE);
-                    link.setText(onmodeurl);
                 }
             }
         });
         alertDialog.show();
 
 
-
         PlayPause = view.findViewById(R.id.playpause);
 
         PlayPause.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View view) {
 
                 if (flag) {
 
-                    PlayPause.setImageDrawable(ContextCompat.getDrawable(Objects.requireNonNull(getContext()), R.drawable.pause));
+                    PlayPause.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.pause));
                     Instructor.setVisibility(View.GONE);
                     webView2.loadUrl(onmodeurl);
                     flag = false;
@@ -119,8 +115,10 @@ public class Onlinemode extends Fragment{
 
                 } else {
 
-                    PlayPause.setImageDrawable(ContextCompat.getDrawable(Objects.requireNonNull(getContext()), R.drawable.playbutton));
+                    PlayPause.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.playbutton));
                     webView2.stopLoading();
+                    Instructor.setVisibility(View.VISIBLE);
+                    Instructor_text.setText("Click Play Button To Resume.");
                     flag = true;
 
                 }

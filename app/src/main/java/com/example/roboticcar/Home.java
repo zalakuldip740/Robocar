@@ -17,7 +17,6 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.IOException;
-import java.util.Objects;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -34,7 +33,7 @@ public class Home extends Fragment implements View.OnTouchListener {
     boolean flag = true;
     LinearLayout Controller, Instructor;
     WebView webView;
-    TextView link;
+    TextView Instructor_text;
     String urlforward, urlbackward, urlleft, urlright, urlstop;
 
     @SuppressLint({"SetTextI18n", "ClickableViewAccessibility"})
@@ -43,11 +42,10 @@ public class Home extends Fragment implements View.OnTouchListener {
                              Bundle savedInstanceState) {
 
         view = inflater.inflate(R.layout.fragment_home, container, false);
-        link = view.findViewById(R.id.extra);
         webView = view.findViewById(R.id.videoview);
         Instructor = view.findViewById(R.id.instructor);
+        Instructor_text = view.findViewById(R.id.instructor_text);
 
-        link.setText("http://192.168.43.213:5000/");
 
 
         urlforward = "http://192.168.43.213:5000/carControl/Forward";
@@ -78,7 +76,7 @@ public class Home extends Fragment implements View.OnTouchListener {
 
                 if (flag) {
 
-                    PlayPause.setImageDrawable(ContextCompat.getDrawable(Objects.requireNonNull(getContext()), R.drawable.pause));
+                    PlayPause.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.pause));
                     Controller.setVisibility(View.VISIBLE);
                     Instructor.setVisibility(View.GONE);
                     webView.loadUrl("http://192.168.43.213:5000/");
@@ -89,9 +87,11 @@ public class Home extends Fragment implements View.OnTouchListener {
 
                 } else {
 
-                    PlayPause.setImageDrawable(ContextCompat.getDrawable(Objects.requireNonNull(getContext()), R.drawable.playbutton));
+                    PlayPause.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.playbutton));
                     Controller.setVisibility(View.GONE);
                     webView.stopLoading();
+                    Instructor.setVisibility(View.VISIBLE);
+                    Instructor_text.setText("Click Play Button To Resume.");
                     flag = true;
 
 

@@ -16,6 +16,7 @@
             android:fontFamily="@font/segoeuibold"
             android:gravity="center_vertical|center_horizontal"/>
 
+
         <WebView
             android:id="@+id/videoview"
             android:layout_width="match_parent"
@@ -34,6 +35,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/instructor_text"
                 android:text="@string/instructor"
                 android:padding="30dp"
                 android:textColor="@color/colorPrimary"
@@ -48,7 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="80dp"
+            android:layout_marginBottom="100dp"
             android:layout_marginEnd="50dp"
             android:layout_marginStart="50dp"
             android:background="@drawable/bottomnav_border"
