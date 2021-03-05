@@ -11,4 +11,5 @@
     <color name="trans">#00000000</color>
     <color name="red">#FF0303</color>
     <color name="black">#000000</color>
+    <color name="grey">#5BD8D6D6</color>
 </resources>

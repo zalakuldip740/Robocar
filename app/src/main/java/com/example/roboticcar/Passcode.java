@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.biometric.BiometricPrompt;
 import androidx.core.content.ContextCompat;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -16,11 +18,35 @@ import java.util.concurrent.Executor;
 public class Passcode extends AppCompatActivity {
     PasscodeView passcodeView;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_passcode);
         passcodeView=findViewById(R.id.passcode_view);
+
+         SharedPreferences sh =getApplicationContext().getSharedPreferences("LOGIN", Context.MODE_PRIVATE);
+       String passcode=sh.getString("passcode","");
+
+
+        passcodeView.setLocalPasscode(passcode);
+        passcodeView.setListener(new PasscodeView.PasscodeViewListener() {
+                    @Override
+                    public void onFail() {
+
+                    }
+
+                    @Override
+                    public void onSuccess(String number) {
+                        Intent intent = new Intent(Passcode.this,MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                        Toast.makeText(getApplicationContext(), "Successful", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+
 
 
         Executor executor = ContextCompat.getMainExecutor(this);
@@ -60,26 +86,6 @@ public class Passcode extends AppCompatActivity {
 
 
         biometricPrompt.authenticate(promptInfo);
-
-
-
-        passcodeView.setLocalPasscode("1234")
-                .setListener(new PasscodeView.PasscodeViewListener() {
-                    @Override
-                    public void onFail() {
-
-                    }
-
-                    @Override
-                    public void onSuccess(String number) {
-                        Intent intent = new Intent(Passcode.this,MainActivity.class);
-                        startActivity(intent);
-                        finish();
-                        Toast.makeText(getApplicationContext(), "Successful", Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-
 
     }
 }

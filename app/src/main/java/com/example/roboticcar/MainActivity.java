@@ -1,7 +1,9 @@
 package com.example.roboticcar;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -28,11 +30,20 @@ public class MainActivity extends AppCompatActivity {
     private long backPressedTime;
     private Toast backToast;
 
+    SharedPreferences sharedPreferences;
+    String loginusername;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        sharedPreferences=getApplicationContext().getSharedPreferences("LOGIN", Context.MODE_PRIVATE);
+        loginusername=sharedPreferences.getString("username","");
+
+
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomnavbar);
 

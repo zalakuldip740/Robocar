@@ -4,6 +4,7 @@ import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.IBinder;
 
@@ -29,18 +30,22 @@ public class exservice extends Service {
         PendingIntent pendingIntent = PendingIntent.getActivity(this,
                 0, notificationIntent, 0);
 
+
+        Bitmap largeicon=BitmapFactory.decodeResource(getResources(), R.drawable.robocaricon);
+
         Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
-                .setContentTitle(datamsg)
-                .setContentText(datetimemsg)
-                .setSmallIcon(R.mipmap.ic_launcher_foreground)
-                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.notification))
+                .setContentTitle("Alert Message : " + datamsg)
+                .setContentText("Time : " + datetimemsg)
+                .setSmallIcon(R.drawable.robocaricon)
+                .setLargeIcon(largeicon)
                 .setContentIntent(pendingIntent)
                 .setShowWhen(false)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .build();
 
         startForeground(1, notification);
-        //stopSelf();
+        // stopForeground(true);
+        // stopSelf();
 
         //NotificationManager manager = getSystemService(NotificationManager.class);
         // manager.notify(1, notification);

@@ -54,7 +54,7 @@
                     android:layout_gravity="center_horizontal|center_vertical"
                     android:fontFamily="@font/segoeuibold"
                     android:padding="15dp"
-                    android:text="170.150.12.10"
+                    android:text=""
                     android:textSize="18sp" />
 
             </LinearLayout>

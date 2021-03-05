@@ -1,6 +1,8 @@
 package com.example.roboticcar;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -34,7 +36,7 @@ public class Home extends Fragment implements View.OnTouchListener {
     LinearLayout Controller, Instructor;
     WebView webView;
     TextView Instructor_text;
-    String urlforward, urlbackward, urlleft, urlright, urlstop;
+    String urlforward, urlbackward, urlleft, urlright, urlstop,usernamedata,streamingurl;
 
     @SuppressLint({"SetTextI18n", "ClickableViewAccessibility"})
     @Override
@@ -48,11 +50,19 @@ public class Home extends Fragment implements View.OnTouchListener {
 
 
 
-        urlforward = "http://192.168.43.213:5000/carControl/Forward";
-        urlbackward = "http://192.168.43.213:5000/carControl/Backward";
-        urlleft = "http://192.168.43.213:5000/carControl/Left";
-        urlright = "http://192.168.43.213:5000/carControl/Right";
-        urlstop = "http://192.168.43.213:5000/carControl/Stop";
+         SharedPreferences sharedPreferences=this.getActivity().getSharedPreferences("LOGIN", Context.MODE_PRIVATE);
+        usernamedata=sharedPreferences.getString("username","");
+
+        streamingurl="http://"+usernamedata+":5000/";
+
+
+
+
+        urlforward = streamingurl+"carControl/Forward";
+        urlbackward = streamingurl+"carControl/Backward";
+        urlleft = streamingurl+"carControl/Left";
+        urlright = streamingurl+"carControl/Right";
+        urlstop = streamingurl+"carControl/Stop";
 
 
         Forwardbutton = view.findViewById(R.id.forward);
@@ -79,7 +89,7 @@ public class Home extends Fragment implements View.OnTouchListener {
                     PlayPause.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.pause));
                     Controller.setVisibility(View.VISIBLE);
                     Instructor.setVisibility(View.GONE);
-                    webView.loadUrl("http://192.168.43.213:5000/");
+                    webView.loadUrl(streamingurl);
                     flag = false;
 
                     //controllerdata.setValue("Stop");
