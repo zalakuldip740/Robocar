@@ -92,7 +92,8 @@
             android:drawableEnd="@drawable/pin"
             android:fontFamily="@font/segoeuibold"
             android:hint="@string/setpasscodelabel"
-            android:inputType="numberPassword"
+            android:maxLength="4"
+            android:inputType="number"
             android:paddingStart="28dp"
             android:paddingEnd="20dp" />
 

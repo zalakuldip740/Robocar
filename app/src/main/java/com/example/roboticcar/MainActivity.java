@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
     SharedPreferences sharedPreferences;
     String loginusername;
+    String msgdatapath;
 
 
     @Override
@@ -44,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
         loginusername=sharedPreferences.getString("username","");
 
 
+        msgdatapath=loginusername.replace(".","_");
+
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomnavbar);
 
@@ -51,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentcontainer, new Home()).commit();
 
 
-        databaseReference.child("businesses").addChildEventListener(new ChildEventListener() {
+        databaseReference.child(msgdatapath).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 datamsg = (String) snapshot.child("Data").getValue();
