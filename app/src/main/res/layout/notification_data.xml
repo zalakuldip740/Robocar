@@ -7,7 +7,7 @@
     android:layout_marginHorizontal="10dp"
     android:layout_marginTop="10dp"
     android:scrollbars="vertical"
-    app:cardCornerRadius="12dp"
+    app:cardCornerRadius="20dp"
     android:elevation="2dp">
 
 
@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="@color/white"
+        android:background="@drawable/profilecardback"
         android:weightSum="3">
         <LinearLayout
             android:layout_width="match_parent"
@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/notification"
             android:background="@drawable/button_border"
-            android:backgroundTint="@color/notification_card_back"
+            android:backgroundTint="@color/white"
             android:layout_gravity="center_vertical|start"
             android:layout_margin="12dp"
             android:padding="16dp"
@@ -37,6 +37,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/notification_alert_msg"
             android:text="@string/demomsg"
+            android:textColor="@color/white"
             android:fontFamily="@font/segoeuibold"
             android:layout_gravity="center_vertical"
             android:gravity="center"
@@ -49,7 +50,7 @@
             android:id="@+id/notification_alert_time"
             android:text="@string/demodate"
             android:fontFamily="@font/segoeuibold"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/white"
             android:layout_gravity="center_vertical"
             android:gravity="end"
             android:layout_margin="12dp"

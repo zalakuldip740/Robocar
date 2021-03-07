@@ -152,8 +152,6 @@ public class Loginpage extends AppCompatActivity {
                     public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
 
                         if (response.isSuccessful()) {
-                            animationloading.pauseAnimation();
-                            animationloading.setVisibility(View.GONE);
                             String responsedata = response.body().string();
                             try {
                                 datares = new JSONObject(responsedata).getString("data");
@@ -166,6 +164,8 @@ public class Loginpage extends AppCompatActivity {
                                 public void run() {
 
 
+                                    animationloading.pauseAnimation();
+                                    animationloading.setVisibility(View.GONE);
                                     if (datares.equalsIgnoreCase("There was an error logging in")) {
 
                                         Toast.makeText(getApplicationContext(), datares, Toast.LENGTH_SHORT).show();
@@ -213,6 +213,8 @@ public class Loginpage extends AppCompatActivity {
                     animationsuccess.setVisibility(View.VISIBLE);
                     animationsuccess.playAnimation();
 
+                    Toast.makeText(getApplicationContext(), "All Done", Toast.LENGTH_SHORT).show();
+
                     editor = sharedPreferences.edit();
                     editor.putString("username", username);
                     editor.putString("passcode",passcode1);
@@ -220,7 +222,6 @@ public class Loginpage extends AppCompatActivity {
                     editor.putString("is_sign", "true");
                     editor.apply();
 
-                    Toast.makeText(getApplicationContext(), datares, Toast.LENGTH_SHORT).show();
 
                     new Handler().postDelayed(new Runnable() {
                         @Override
@@ -231,7 +232,7 @@ public class Loginpage extends AppCompatActivity {
                             finish();
 
                         }
-                    }, 2000);
+                    }, 1000);
 
                 }
 
@@ -245,6 +246,7 @@ public class Loginpage extends AppCompatActivity {
         AlertDialog alertDialog = new AlertDialog.Builder(Loginpage.this).create();
         alertDialog.setTitle("Login Successful");
         alertDialog.setMessage("Now Set 4 digit passcode for unlock app");
+        alertDialog.setCanceledOnTouchOutside(false);
         alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                 new DialogInterface.OnClickListener() {
                     @SuppressLint("SetTextI18n")

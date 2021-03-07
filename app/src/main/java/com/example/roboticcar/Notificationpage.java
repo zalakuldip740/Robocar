@@ -1,5 +1,7 @@
 package com.example.roboticcar;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,8 +18,10 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class Notificationpage extends Fragment {
     View view;
-    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("businesses");
+    DatabaseReference databaseReference;
     Notification_dataAdaptor adapter;
+    SharedPreferences sharedPreferences;
+    String msgdata,msgdatapath;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -26,6 +30,12 @@ public class Notificationpage extends Fragment {
         view = inflater.inflate(R.layout.fragment_notificationpage, container, false);
 
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getActivity());
+
+        sharedPreferences=this.getActivity().getSharedPreferences("LOGIN", Context.MODE_PRIVATE);
+        msgdata=sharedPreferences.getString("username","");
+
+        msgdatapath=msgdata.replace(".","_");
+        databaseReference= FirebaseDatabase.getInstance().getReference().child(msgdatapath);
 
 
         RecyclerView recyclerView = view.findViewById(R.id.notification_recycleview);
