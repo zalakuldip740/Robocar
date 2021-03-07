@@ -63,14 +63,7 @@ public class Onlinemode extends Fragment {
         btn_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Intent intent = new Intent(getActivity(), MainActivity.class);
-                //startActivity(intent);
-                //Fragment fragment = new Home();
-                //FragmentManager fragmentManager = Objects.requireNonNull(getActivity()).getSupportFragmentManager();
-                //FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                //fragmentTransaction.replace(R.id.fragmentcontainer, fragment);
-                //fragmentTransaction.addToBackStack(null);
-                //fragmentTransaction.commit();
+
                 alertDialog.dismiss();
                 Instructor.setVisibility(View.VISIBLE);
 
@@ -83,8 +76,7 @@ public class Onlinemode extends Fragment {
             public void onClick(View v) {
 
                 if (TextUtils.isEmpty(txt_inputText.getText().toString())) {
-                    Toast toast = Toast.makeText(getContext(), "Enter Valid Input", Toast.LENGTH_SHORT);
-                    toast.show();
+                     Toast.makeText(getContext(), "Enter Valid Input", Toast.LENGTH_SHORT).show();
 
                 } else {
                     onmodeurl = txt_inputText.getText().toString();

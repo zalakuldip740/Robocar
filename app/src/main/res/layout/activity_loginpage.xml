@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorPrimary"
-    android:orientation="vertical"
-    android:weightSum="7"
     tools:context=".Loginpage">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="7">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,15 +33,29 @@
             android:textSize="35sp"
             tools:ignore="NestedWeights" />
 
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="30sp"
+            android:id="@+id/stepdescription"
+            android:layout_marginStart="30dp"
             android:layout_marginTop="10dp"
             android:fontFamily="@font/segoeuibold"
             android:text="@string/login_extratext"
             android:textColor="@color/white"
             android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/step"
+            android:layout_marginEnd="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_gravity="end"
+            android:fontFamily="@font/segoeuibold"
+            android:text="@string/step"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
 
     </LinearLayout>
 
@@ -44,6 +63,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="5"
+        android:id="@+id/logininputpage"
         android:background="@drawable/dialog_style"
         android:elevation="32dp"
         android:orientation="vertical">
@@ -60,9 +80,12 @@
             android:drawableEnd="@drawable/profile"
             android:fontFamily="@font/segoeuibold"
             android:hint="@string/login_username"
-            android:inputType="text"
+            android:inputType="number"
+            android:digits="0123456789."
+            android:maxLength="15"
             android:paddingStart="28dp"
-            android:paddingEnd="20dp" />
+            android:paddingEnd="20dp"
+            tools:ignore="Autofill" />
 
         <EditText
             android:id="@+id/login_password"
@@ -78,24 +101,9 @@
             android:hint="@string/login_password"
             android:inputType="textPassword"
             android:paddingStart="28dp"
-            android:paddingEnd="20dp" />
+            android:paddingEnd="20dp"
+            tools:ignore="Autofill" />
 
-        <EditText
-            android:id="@+id/login_passcode"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginStart="48dp"
-            android:layout_marginTop="48dp"
-            android:layout_marginEnd="48dp"
-            android:background="@drawable/bottomnav_border"
-            android:backgroundTint="@color/grey"
-            android:drawableEnd="@drawable/pin"
-            android:fontFamily="@font/segoeuibold"
-            android:hint="@string/setpasscodelabel"
-            android:maxLength="4"
-            android:inputType="number"
-            android:paddingStart="28dp"
-            android:paddingEnd="20dp" />
 
 
         <Button
@@ -117,4 +125,95 @@
 
 
     </LinearLayout>
-</LinearLayout>
+
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:id="@+id/setpasscodeinputpage"
+            android:layout_weight="5"
+            android:background="@drawable/dialog_style"
+            android:elevation="32dp"
+            android:visibility="gone"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/setpasscode1"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginStart="48dp"
+                android:layout_marginTop="48dp"
+                android:layout_marginEnd="48dp"
+                android:background="@drawable/bottomnav_border"
+                android:backgroundTint="@color/grey"
+                android:fontFamily="@font/segoeuibold"
+                android:hint="@string/setpasscodelabel"
+                android:maxLength="4"
+                android:inputType="number"
+                android:paddingStart="28dp"
+                android:paddingEnd="20dp"
+                tools:ignore="Autofill" />
+
+            <EditText
+                android:id="@+id/setpasscode2"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginStart="48dp"
+                android:layout_marginTop="48dp"
+                android:layout_marginEnd="48dp"
+                android:background="@drawable/bottomnav_border"
+                android:backgroundTint="@color/grey"
+                android:fontFamily="@font/segoeuibold"
+                android:hint="@string/setpasscodelabelconfirm"
+                android:maxLength="4"
+                android:inputType="number"
+                android:paddingStart="28dp"
+                android:paddingEnd="20dp"
+                tools:ignore="Autofill" />
+
+
+            <Button
+                android:id="@+id/passcode_done"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginTop="48dp"
+                android:layout_marginEnd="48dp"
+                android:background="@drawable/bottomnav_border"
+                android:backgroundTint="@color/colorPrimary"
+                android:fontFamily="@font/segoeuibold"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
+                android:text="@string/Done"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+
+
+        </LinearLayout>
+
+
+
+
+    </LinearLayout>
+    <com.airbnb.lottie.LottieAnimationView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:id="@+id/animation_loading"
+        app:lottie_rawRes="@raw/loading"
+        android:visibility="gone"
+        app:lottie_loop="true"/>
+    <com.airbnb.lottie.LottieAnimationView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:id="@+id/animation_success"
+        app:lottie_rawRes="@raw/success"
+        android:visibility="gone"
+        app:lottie_loop="true"/>
+
+
+</RelativeLayout>

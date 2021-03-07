@@ -24,6 +24,7 @@
     <string name="Email_data">robocarhelp123@gmail.com</string>
     <string name="Login">Login</string>
     <string name="welcometxt">Welcome User</string>
+    <string name="step">Step : 1</string>
     <string name="login_username">Enter Robocar IP</string>
     <string name="login_password">Enter Password</string>
     <string name="login_extratext">Login using Robocar IP and Password.</string>
@@ -31,6 +32,7 @@
     <string name="submit">Submit</string>
     <string name="Done">Done</string>
     <string name="setpasscodelabel">Set 4 digit Pin</string>
+    <string name="setpasscodelabelconfirm">Confirm 4 digit Pin</string>
 
 
 
