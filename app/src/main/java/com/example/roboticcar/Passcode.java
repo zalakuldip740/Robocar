@@ -1,15 +1,15 @@
 package com.example.roboticcar;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.biometric.BiometricPrompt;
-import androidx.core.content.ContextCompat;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.biometric.BiometricPrompt;
+import androidx.core.content.ContextCompat;
 
 import com.hanks.passcodeview.PasscodeView;
 
@@ -18,35 +18,34 @@ import java.util.concurrent.Executor;
 public class Passcode extends AppCompatActivity {
     PasscodeView passcodeView;
 
+    String passcode;
+    SharedPreferences sharedPreferences;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_passcode);
-        passcodeView=findViewById(R.id.passcode_view);
+        passcodeView = findViewById(R.id.passcode_view);
 
-         SharedPreferences sh =getApplicationContext().getSharedPreferences("LOGIN", Context.MODE_PRIVATE);
-       String passcode=sh.getString("passcode","");
+        sharedPreferences = getApplicationContext().getSharedPreferences("LOGIN", Context.MODE_PRIVATE);
+        passcode = sharedPreferences.getString("passcode", "");
 
 
         passcodeView.setLocalPasscode(passcode);
         passcodeView.setListener(new PasscodeView.PasscodeViewListener() {
-                    @Override
-                    public void onFail() {
+            @Override
+            public void onFail() {
 
-                    }
+            }
 
-                    @Override
-                    public void onSuccess(String number) {
-                        Intent intent = new Intent(Passcode.this,MainActivity.class);
-                        startActivity(intent);
-                        finish();
-                        Toast.makeText(getApplicationContext(), "Successful", Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-
+            @Override
+            public void onSuccess(String number) {
+                Intent intent = new Intent(Passcode.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
 
         Executor executor = ContextCompat.getMainExecutor(this);
@@ -62,7 +61,7 @@ public class Passcode extends AppCompatActivity {
             public void onAuthenticationSucceeded(@NonNull BiometricPrompt.AuthenticationResult result) {
                 super.onAuthenticationSucceeded(result);
 
-                Intent intent = new Intent(Passcode.this,MainActivity.class);
+                Intent intent = new Intent(Passcode.this, MainActivity.class);
                 startActivity(intent);
                 finish();
                 Toast.makeText(getApplicationContext(), "Successful", Toast.LENGTH_SHORT).show();
@@ -86,6 +85,7 @@ public class Passcode extends AppCompatActivity {
 
 
         biometricPrompt.authenticate(promptInfo);
+
 
     }
 }

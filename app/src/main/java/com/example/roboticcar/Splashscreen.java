@@ -34,7 +34,7 @@ public class Splashscreen extends AppCompatActivity {
         SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("LOGIN", Context.MODE_PRIVATE);
         String logedin = sharedPreferences.getString("is_sign", "");
 
-        if (logedin.equalsIgnoreCase("true")) {
+        if (logedin.equals("true")) {
 
             startActivity(new Intent(getApplicationContext(), Passcode.class));
         } else {

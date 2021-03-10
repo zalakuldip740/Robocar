@@ -24,5 +24,6 @@
     android:layout_margin="25dp"
     android:elevation="5dp"
     android:background="@drawable/bottomnav_border"
-    app:menu="@menu/navmenuitem"/>
+    app:menu="@menu/navmenuitem"
+    android:visibility="gone"/>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

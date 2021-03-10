@@ -3,12 +3,14 @@ package com.example.roboticcar;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -17,11 +19,13 @@ import android.widget.Toast;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
+import java.util.Objects;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -33,13 +37,16 @@ import okhttp3.Response;
 public class Home extends Fragment implements View.OnTouchListener {
     View view;
     ImageButton Forwardbutton, Backwardbutton, Leftbutton, Rightbutton;
-    //DatabaseReference controllerdata = FirebaseDatabase.getInstance().getReference().child(("Controls/data"));
+
     FloatingActionButton PlayPause;
     boolean flag = true;
     LinearLayout Controller, Instructor;
     WebView webView;
     TextView Instructor_text;
-    String urlforward, urlbackward, urlleft, urlright, urlstop,usernamedata,streamingurl;
+    String urlforward, urlbackward, urlleft, urlright, urlstop, usernamedata, streamingurl, generalurl;
+    String tokenvalue;
+    String htmlstring;
+    LottieAnimationView animationloading;
 
     @SuppressLint({"SetTextI18n", "ClickableViewAccessibility"})
     @Override
@@ -52,20 +59,23 @@ public class Home extends Fragment implements View.OnTouchListener {
         Instructor_text = view.findViewById(R.id.instructor_text);
 
 
-
-         SharedPreferences sharedPreferences=this.getActivity().getSharedPreferences("LOGIN", Context.MODE_PRIVATE);
-        usernamedata=sharedPreferences.getString("username","");
-
-        streamingurl="http://"+usernamedata+":5000/";
+        animationloading = view.findViewById(R.id.animation_loading);
 
 
+        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences("LOGIN", Context.MODE_PRIVATE);
+        usernamedata = sharedPreferences.getString("username", "");
+        tokenvalue = sharedPreferences.getString("token", "");
 
 
-        urlforward = streamingurl+"carControl/Forward";
-        urlbackward = streamingurl+"carControl/Backward";
-        urlleft = streamingurl+"carControl/Left";
-        urlright = streamingurl+"carControl/Right";
-        urlstop = streamingurl+"carControl/Stop";
+        generalurl = "http://" + usernamedata + ":5000/";
+        streamingurl = generalurl + "video_feed";
+
+
+        urlforward = generalurl + "carControl/Forward";
+        urlbackward = generalurl + "carControl/Backward";
+        urlleft = generalurl + "carControl/Left";
+        urlright = generalurl + "carControl/Right";
+        urlstop = generalurl + "carControl/Stop";
 
 
         Forwardbutton = view.findViewById(R.id.forward);
@@ -84,6 +94,7 @@ public class Home extends Fragment implements View.OnTouchListener {
 
 
         PlayPause.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetJavaScriptEnabled")
             @Override
             public void onClick(View view) {
 
@@ -92,7 +103,10 @@ public class Home extends Fragment implements View.OnTouchListener {
                     PlayPause.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.pause));
                     Controller.setVisibility(View.VISIBLE);
                     Instructor.setVisibility(View.GONE);
-                    webView.loadUrl(streamingurl);
+                    controllingreq(streamingurl);
+                    //webView.loadUrl("https://www.google.com/webhp?authuser=1");
+                    // webView.setWebViewClient(new CustomWebViewClient());
+                    // webView.getSettings().setJavaScriptEnabled(true);
                     flag = false;
 
                     //controllerdata.setValue("Stop");
@@ -124,13 +138,12 @@ public class Home extends Fragment implements View.OnTouchListener {
             case R.id.forward:
                 if (motionEvent.getAction() == MotionEvent.ACTION_UP ||
                         motionEvent.getAction() == MotionEvent.ACTION_CANCEL) {
-                    //controllerdata.setValue("Stop");
                     controllingreq(urlstop);
                     Forwardbutton.setBackgroundColor(0);
                 } else if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
 
                     controllingreq(urlforward);
-                    // controllerdata.setValue("Forward");
+
                     Forwardbutton.setBackgroundColor(0x310E68FF);
                 }
                 break;
@@ -138,12 +151,12 @@ public class Home extends Fragment implements View.OnTouchListener {
                 if (motionEvent.getAction() == MotionEvent.ACTION_UP ||
                         motionEvent.getAction() == MotionEvent.ACTION_CANCEL) {
                     controllingreq(urlstop);
-                    // controllerdata.setValue("Stop");
+
                     Backwardbutton.setBackgroundColor(0);
                 } else if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
 
                     controllingreq(urlbackward);
-                    // controllerdata.setValue("Backward");
+
                     Backwardbutton.setBackgroundColor(0x310E68FF);
                 }
                 break;
@@ -152,12 +165,12 @@ public class Home extends Fragment implements View.OnTouchListener {
                 if (motionEvent.getAction() == MotionEvent.ACTION_UP ||
                         motionEvent.getAction() == MotionEvent.ACTION_CANCEL) {
                     controllingreq(urlstop);
-                    // controllerdata.setValue("Stop");
+
                     Leftbutton.setBackgroundColor(0);
                 } else if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
 
                     controllingreq(urlleft);
-                    // controllerdata.setValue("Left");
+
                     Leftbutton.setBackgroundColor(0x310E68FF);
                 }
                 break;
@@ -166,39 +179,92 @@ public class Home extends Fragment implements View.OnTouchListener {
                 if (motionEvent.getAction() == MotionEvent.ACTION_UP ||
                         motionEvent.getAction() == MotionEvent.ACTION_CANCEL) {
                     controllingreq(urlstop);
-                    // controllerdata.setValue("Stop");
+
                     Rightbutton.setBackgroundColor(0);
                 } else if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
 
                     controllingreq(urlright);
-                    // controllerdata.setValue("Right");
+
                     Rightbutton.setBackgroundColor(0x310E68FF);
                 }
                 break;
 
         }
+
         return true;
     }
 
-    private void controllingreq(String url) {
+    private void controllingreq(final String url) {
 
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
                 .url(url)
+                .get()
+                .addHeader("Authorization", tokenvalue)
                 .build();
         client.newCall(request).enqueue(new Callback() {
             @Override
-            public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+            public void onFailure(@NotNull Call call, @NotNull final IOException e) {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
 
             }
 
             @Override
-            public void onResponse(@NotNull Call call, @NotNull Response response) {
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+
+                if (response.isSuccessful()) {
+                    htmlstring = Objects.requireNonNull(response.body()).string();
+                }
+
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (url.equals(streamingurl)) {
+
+                            webView.post(new Runnable() {
+                                @SuppressLint("SetJavaScriptEnabled")
+                                @Override
+                                public void run() {
+                                    webView.loadDataWithBaseURL(streamingurl, htmlstring, "text/html", "utf-8", null);
+
+                                    webView.setWebViewClient(new CustomWebViewClient());
+                                    webView.getSettings().setJavaScriptEnabled(true);
+                                }
+                            });
+                        }
+
+                    }
+                });
+
 
             }
         });
     }
 
+
+    private class CustomWebViewClient extends WebViewClient {
+
+        @Override
+        public void onPageStarted(WebView webview, String url, Bitmap favicon) {
+            animationloading.setVisibility(View.VISIBLE);
+            animationloading.playAnimation();
+
+        }
+
+        @Override
+        public void onPageFinished(WebView view, String url) {
+
+            animationloading.setVisibility(View.GONE);
+            animationloading.pauseAnimation();
+            super.onPageFinished(view, url);
+
+        }
+    }
 
 }

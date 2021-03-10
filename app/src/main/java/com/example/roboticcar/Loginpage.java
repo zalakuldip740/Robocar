@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.airbnb.lottie.LottieAnimationView;
 
@@ -26,6 +27,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.Objects;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -152,7 +154,7 @@ public class Loginpage extends AppCompatActivity {
                     public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
 
                         if (response.isSuccessful()) {
-                            String responsedata = response.body().string();
+                            String responsedata = Objects.requireNonNull(response.body()).string();
                             try {
                                 datares = new JSONObject(responsedata).getString("data");
                             } catch (JSONException e) {
@@ -166,9 +168,9 @@ public class Loginpage extends AppCompatActivity {
 
                                     animationloading.pauseAnimation();
                                     animationloading.setVisibility(View.GONE);
-                                    if (datares.equalsIgnoreCase("There was an error logging in")) {
+                                    if (datares.equals("There was an error logging in")) {
 
-                                        Toast.makeText(getApplicationContext(), datares, Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getApplicationContext(),"Invalid Credential or error!", Toast.LENGTH_SHORT).show();
                                     } else {
 
                                         loginsuccessdialog();
@@ -230,6 +232,10 @@ public class Loginpage extends AppCompatActivity {
                             Intent intent = new Intent(Loginpage.this, Passcode.class);
                             startActivity(intent);
                             finish();
+                            Intent serviceIntent = new Intent(Loginpage.this, exservice.class);
+                            serviceIntent.putExtra("datamsg", "Your Alert Message Appear Here");
+                            serviceIntent.putExtra("datetimemsg", "Your Alert Message Time Appear Here");
+                            ContextCompat.startForegroundService(Loginpage.this, serviceIntent);
 
                         }
                     }, 1000);
@@ -247,7 +253,7 @@ public class Loginpage extends AppCompatActivity {
         alertDialog.setTitle("Login Successful");
         alertDialog.setMessage("Now Set 4 digit passcode for unlock app");
         alertDialog.setCanceledOnTouchOutside(false);
-        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
                 new DialogInterface.OnClickListener() {
                     @SuppressLint("SetTextI18n")
                     public void onClick(DialogInterface dialog, int which) {

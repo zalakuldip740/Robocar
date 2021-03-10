@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Notificationpage">
 
     <!-- TODO: Update blank fragment layout -->
@@ -11,5 +12,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="20dp"/>
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:id="@+id/animation_loading"
+        app:lottie_rawRes="@raw/loading"
+        android:visibility="gone"
+        app:lottie_loop="true"/>
 
 </RelativeLayout>
