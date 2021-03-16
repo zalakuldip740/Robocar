@@ -27,7 +27,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity {
 
-    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+    DatabaseReference databaseReference;
     String datamsg;
     String datetimemsg;
 
@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
         msgdatapath = loginusername.replace(".", "_");
 
+        databaseReference = FirebaseDatabase.getInstance().getReference().child(msgdatapath);
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomnavbar);
 
@@ -61,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentcontainer, new Home()).commit();
 
 
-        databaseReference.child(msgdatapath).addChildEventListener(new ChildEventListener() {
+        databaseReference.orderByKey().limitToLast(1).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
 
@@ -79,9 +80,7 @@ public class MainActivity extends AppCompatActivity {
 
                     editor = sharedPreferences.edit();
                     editor.putString("key", childkey).apply();
-
                 }
-
 
             }
 

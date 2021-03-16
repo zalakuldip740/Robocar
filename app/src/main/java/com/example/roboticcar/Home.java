@@ -3,14 +3,13 @@ package com.example.roboticcar;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -25,7 +24,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
-import java.util.Objects;
+import java.util.HashMap;
+import java.util.Map;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -45,7 +45,6 @@ public class Home extends Fragment implements View.OnTouchListener {
     TextView Instructor_text;
     String urlforward, urlbackward, urlleft, urlright, urlstop, usernamedata, streamingurl, generalurl;
     String tokenvalue;
-    String htmlstring;
     LottieAnimationView animationloading;
 
     @SuppressLint({"SetTextI18n", "ClickableViewAccessibility"})
@@ -101,15 +100,25 @@ public class Home extends Fragment implements View.OnTouchListener {
                 if (flag) {
 
                     PlayPause.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.pause));
+                    animationloading.setVisibility(View.VISIBLE);
+                    animationloading.playAnimation();
+
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+
+                            animationloading.setVisibility(View.GONE);
+                            animationloading.pauseAnimation();
+
+                        }
+                    }, 2000);
                     Controller.setVisibility(View.VISIBLE);
                     Instructor.setVisibility(View.GONE);
-                    controllingreq(streamingurl);
-                    //webView.loadUrl("https://www.google.com/webhp?authuser=1");
-                    // webView.setWebViewClient(new CustomWebViewClient());
-                    // webView.getSettings().setJavaScriptEnabled(true);
+                    Map<String, String> extraHeaders = new HashMap<>();
+                    extraHeaders.put("Authorization", tokenvalue);
+                    webView.loadUrl(streamingurl, extraHeaders);
+                    webView.getSettings().setJavaScriptEnabled(true);
                     flag = false;
-
-                    //controllerdata.setValue("Stop");
 
 
                 } else {
@@ -126,6 +135,15 @@ public class Home extends Fragment implements View.OnTouchListener {
 
             }
         });
+
+
+        // if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+        //   LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(200, LinearLayout.LayoutParams.MATCH_PARENT);
+        // params.gravity=Gravity.END| Gravity.BOTTOM;
+        // Controller.setLayoutParams(params);
+        // Controller.setBackgroundColor(0x00000000);
+        //  }
+
 
         return view;
     }
@@ -191,6 +209,7 @@ public class Home extends Fragment implements View.OnTouchListener {
 
         }
 
+
         return true;
     }
 
@@ -212,59 +231,15 @@ public class Home extends Fragment implements View.OnTouchListener {
                     }
                 });
 
-
             }
 
             @Override
-            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-
-                if (response.isSuccessful()) {
-                    htmlstring = Objects.requireNonNull(response.body()).string();
-                }
-
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (url.equals(streamingurl)) {
-
-                            webView.post(new Runnable() {
-                                @SuppressLint("SetJavaScriptEnabled")
-                                @Override
-                                public void run() {
-                                    webView.loadDataWithBaseURL(streamingurl, htmlstring, "text/html", "utf-8", null);
-
-                                    webView.setWebViewClient(new CustomWebViewClient());
-                                    webView.getSettings().setJavaScriptEnabled(true);
-                                }
-                            });
-                        }
-
-                    }
-                });
+            public void onResponse(@NotNull Call call, @NotNull Response response) {
 
 
             }
         });
     }
 
-
-    private class CustomWebViewClient extends WebViewClient {
-
-        @Override
-        public void onPageStarted(WebView webview, String url, Bitmap favicon) {
-            animationloading.setVisibility(View.VISIBLE);
-            animationloading.playAnimation();
-
-        }
-
-        @Override
-        public void onPageFinished(WebView view, String url) {
-
-            animationloading.setVisibility(View.GONE);
-            animationloading.pauseAnimation();
-            super.onPageFinished(view, url);
-
-        }
-    }
 
 }
