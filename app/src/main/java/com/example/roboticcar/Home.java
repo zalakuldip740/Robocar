@@ -118,6 +118,7 @@ public class Home extends Fragment implements View.OnTouchListener {
                     extraHeaders.put("Authorization", tokenvalue);
                     webView.loadUrl(streamingurl, extraHeaders);
                     webView.getSettings().setJavaScriptEnabled(true);
+                    webView.getSettings().setBuiltInZoomControls(true);
                     flag = false;
 
 
