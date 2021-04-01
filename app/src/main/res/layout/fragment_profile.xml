@@ -102,17 +102,16 @@
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
-
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/logout"
-        android:layout_marginBottom="100dp"
-        android:fontFamily="@font/segoeuibold"
-        android:gravity="bottom|center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="@string/Logout"
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/logout"
+        android:fontFamily="@font/segoeuibold"
         android:textColor="@color/colorPrimary"
         android:textSize="20sp" />
+
 
 
 </LinearLayout>
